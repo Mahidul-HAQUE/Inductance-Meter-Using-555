@@ -1,0 +1,11 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Proteus backup files
+*.bak
+*.DBK
+*.lck
+
+# Windows
+desktop.ini
