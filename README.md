@@ -101,6 +101,7 @@ $$L_m = \frac{X_L}{2\pi f} = \frac{362.44}{2\pi \times 5499} \approx 10.5 \ \tex
 
 $$\% \text{Error} = \frac{L_m - L}{L} \times 100\% = \frac{10.5 - 10}{10} \times 100\% = 5\%$$
 
+
 ---
 
 ## Observations
