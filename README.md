@@ -1,10 +1,3 @@
-# Inductance Meter Using 555 Timer IC
-
-> **Course:** EECE-314 — Electrical Measurement, Instrumentation and Sensors Lab  
-> **Institution:** Military Institute of Science and Technology (MIST)  
-> **Department:** Electrical, Electronic and Communication Engineering  
-> **Group:** 01
-
 ---
 
 ## 📋 Table of Contents
@@ -33,21 +26,27 @@ The design is especially suited for students and hobbyists who want to understan
 
 The 555 timer is configured in **astable mode**, producing a continuous square wave. The unknown inductor is placed in series with the circuit. By measuring the AC voltage across the inductor and the current through it, inductive reactance is found using Ohm's Law for AC:
 
-$$X_L = \frac{V}{I}$$
+```
+XL = V / I
+```
 
 The inductance is then derived using:
 
-$$L = \frac{X_L}{2\pi f}$$
+```
+L = XL / (2π × f)
+```
 
 Where:
-- $X_L$ = Inductive reactance (Ω)  
-- $V$ = AC voltage across the inductor (V)  
-- $I$ = AC current through the inductor (A)  
-- $f$ = Oscillation frequency from the 555 timer (Hz)
+- `XL` = Inductive reactance (Ω)  
+- `V` = AC voltage across the inductor (V)  
+- `I` = AC current through the inductor (A)  
+- `f` = Oscillation frequency from the 555 timer (Hz)
 
 The **555 astable frequency** is set by:
 
-$$f = \frac{1.44}{(R_1 + 2R_2) \cdot C}$$
+```
+f = 1.44 / ((R1 + 2×R2) × C)
+```
 
 ---
 
@@ -62,7 +61,7 @@ $$f = \frac{1.44}{(R_1 + 2R_2) \cdot C}$$
 | L1 | Unknown (DUT) | Inductor under test |
 | AC Ammeter | — | Measures current through L1 |
 | AC Voltmeter | — | Measures voltage across L1 |
-| Counter | — | Displays oscillation frequency |
+| 7-Segment Display | — | Displays oscillation frequency |
 
 > The 555 output (Pin 3) drives the L-R series branch. The frequency counter connected to the CLK pin of the display module reads the real-time oscillation frequency.
 
@@ -91,16 +90,27 @@ Simulation file: [`simulation/inductor meter.pdsprj`](simulation/)
 
 **Step 1 — Inductive Reactance:**
 
-$$X_L = \frac{V}{I} = \frac{3.57}{9.85 \times 10^{-3}} = 362.44 \ \Omega$$
+```
+XL = V / I
+XL = 3.57 / (9.85 × 10⁻³)
+XL = 362.44 Ω
+```
 
 **Step 2 — Measured Inductance:**
 
-$$L_m = \frac{X_L}{2\pi f} = \frac{362.44}{2\pi \times 5499} \approx 10.5 \ \text{mH}$$
+```
+Lm = XL / (2π × f)
+Lm = 362.44 / (2π × 5499)
+Lm ≈ 10.5 mH
+```
 
 **Step 3 — Percentage Error:**
 
-$$\% \text{Error} = \frac{L_m - L}{L} \times 100\% = \frac{10.5 - 10}{10} \times 100\% = 5\%$$
-
+```
+% Error = ((Lm - L) / L) × 100%
+% Error = ((10.5 - 10) / 10) × 100%
+% Error = 5%
+```
 
 ---
 
@@ -114,7 +124,7 @@ Through repeated simulation and testing at different inductance values, an impor
 
 **Why this happens:**
 
-1. **Impedance Dominance** — At higher inductance values, $X_L = 2\pi fL$ becomes very large relative to the resistive elements in the circuit. This means the total circuit impedance is increasingly dominated by the inductor, making the current very small and harder to measure accurately.
+1. **Impedance Dominance** — At higher inductance values, `XL = 2πfL` becomes very large relative to the resistive elements in the circuit. This means the total circuit impedance is increasingly dominated by the inductor, making the current very small and harder to measure accurately.
 
 2. **Voltmeter/Ammeter Loading** — Virtual instruments (and real ones) have finite input impedances. At very high $X_L$, even small loading errors from meters produce proportionally larger errors in the final calculation.
 
