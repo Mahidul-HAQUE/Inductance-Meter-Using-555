@@ -62,7 +62,7 @@ $$f = \frac{1.44}{(R_1 + 2R_2) \cdot C}$$
 | L1 | Unknown (DUT) | Inductor under test |
 | AC Ammeter | — | Measures current through L1 |
 | AC Voltmeter | — | Measures voltage across L1 |
-| 7-Segment Display | — | Displays oscillation frequency |
+| Counter | — | Displays oscillation frequency |
 
 > The 555 output (Pin 3) drives the L-R series branch. The frequency counter connected to the CLK pin of the display module reads the real-time oscillation frequency.
 
