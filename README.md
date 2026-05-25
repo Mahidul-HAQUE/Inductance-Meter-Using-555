@@ -180,4 +180,4 @@ inductance-meter-555/
 
 ---
 
-*Military Institute of Science and Technology — EECE-314 Lab, 2024*
+*Military Institute of Science and Technology — EECE-314, 2024*
