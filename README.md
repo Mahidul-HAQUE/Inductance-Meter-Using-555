@@ -29,19 +29,6 @@ The design is especially suited for students and hobbyists who want to understan
 
 ---
 
-## Team Members
-
-| Name | Student ID |
-|---|---|
-| Labib Siddique Siam | 202216025 |
-| Md. Faizul Islam Leon | 202216038 |
-| Md. Mahidul Haque Mahi | 202216043 |
-| Syed Md Hasin Tasnim | 202216301 |
-| Md. Rakibul Hasan | 202216051 |
-| Md. Salman Rashid Himel | 202116169 |
-
----
-
 ## Working Principle
 
 The 555 timer is configured in **astable mode**, producing a continuous square wave. The unknown inductor is placed in series with the circuit. By measuring the AC voltage across the inductor and the current through it, inductive reactance is found using Ohm's Law for AC:
