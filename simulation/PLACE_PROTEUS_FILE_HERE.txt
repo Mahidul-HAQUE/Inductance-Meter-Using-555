@@ -1,0 +1,6 @@
+Place the Proteus simulation file here.
+
+Expected filename: inductor meter.pdsprj
+
+This file was created in Proteus Design Suite and contains the full
+astable 555 timer inductance meter schematic and simulation setup.

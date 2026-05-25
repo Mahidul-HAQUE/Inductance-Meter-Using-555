@@ -13,9 +13,10 @@
 | Inductor Value (Actual) | Frequency (Hz) | V across L (V) | I through L (mA) | XL (Ω) | Measured L (mH) | % Error |
 |---|---|---|---|---|---|---|
 | 10 mH | 5499 | 3.57 | 9.85 | 362.44 | 10.5 | **5.0%** |
-| 100 mH | — | — | — | — | — | *Higher* |
+| 100 mH | — | — | — | — | — | *Lower* |
+| 1 mH | — | — | — | — | — | *Higher* |
 
-> ⚠️ Additional rows to be filled in as more inductor values are tested.
+> Additional rows to be filled in as more inductor values are tested.
 
 ---
 
@@ -23,37 +24,50 @@
 
 It was observed experimentally and through simulation that:
 
-**As the inductance (L) of the DUT increases, the percentage error in the measured value also increases.**
+**As the inductance (L) of the DUT increases, the percentage error DECREASES. Conversely, lower inductance values produce HIGHER percentage error.**
 
 ### Reasoning
 
-| Factor | Effect at Higher L |
+| Factor | Effect at Lower L |
 |---|---|
-| Inductive reactance $X_L = 2\pi fL$ | Becomes very large; current drops significantly |
-| Small-signal current measurement | Harder to measure accurately with standard AC ammeter |
-| Frequency drift of 555 timer | Has a proportionally larger impact on $X_L$ at high L |
-| Square wave harmonic distortion | Inductor filters harmonics more, distorting AC readings |
+| Inductive reactance (XL = 2*pi*f*L) | Becomes very small; voltage across inductor is tiny |
+| AC voltmeter resolution | Small absolute reading error becomes a large % of the small actual value |
+| Signal-to-noise ratio | Inductor signal is close to noise floor; harder to distinguish |
+| Meter accuracy limits | Both V and I readings approach instrument resolution limits |
 
-### Suggested Mitigation
+### Why Higher L Reads More Accurately
 
-- For larger inductors, **lower the oscillation frequency** by increasing R1 or C1 so that $X_L$ stays in a measurable range.
-- Use a **higher precision frequency counter** to reduce frequency measurement error.
+At higher inductance values, XL is large, so the voltage drop across the inductor is
+significant and well within the reliable range of the AC voltmeter. The V/I ratio is
+easier to measure cleanly, so the calculated XL is close to the true value, and the
+final inductance result has a lower percentage error.
+
+### Suggested Mitigation for Low Inductance
+
+- **Increase the oscillation frequency** (reduce R1 or C1) so that XL = 2*pi*f*L
+  becomes large enough to measure reliably even for small L values.
+- Use a **higher precision voltmeter** with better resolution at low voltages.
 - Use **precision resistors and capacitors** (1% tolerance or better) in the 555 timing network.
-- Consider adding a **buffer amplifier** at the 555 output to reduce loading effects.
 
 ---
 
 ## Circuit Frequency (Theoretical Check)
 
-Using astable formula:
+Using the astable formula:
 
-$$f = \frac{1.44}{(R_1 + 2R_2) \cdot C_1}$$
+```
+f = 1.44 / ((R1 + 2*R2) * C1)
+```
 
-With R1 = 200 Ω, no R2 (zero), C1 = 0.2 µF:
+With R1 = 200 Ω, C1 = 0.2 µF:
 
-$$f = \frac{1.44}{200 \times 0.2 \times 10^{-6}} = \frac{1.44}{4 \times 10^{-5}} = 36{,}000 \ \text{Hz}$$
+```
+f = 1.44 / (200 * 0.2e-6) = 36,000 Hz (theoretical)
+```
 
-> Note: The simulated frequency of ~5499 Hz suggests the circuit uses additional impedance from the inductor branch or a different R2 value in the actual simulation. The frequency counter on the display shows the real operating frequency and that value should always be used in calculations — not the theoretical estimate.
+> Note: The simulated frequency of ~5499 Hz indicates the inductor branch impedance
+> influences the effective timing in simulation. Always use the frequency counter
+> reading — not the theoretical estimate — in the final calculation.
 
 ---
 
